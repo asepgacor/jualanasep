@@ -3,138 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Benefit Script</title>
+<title>Sale Script And Patnert By Asep</title>
 <style>
     body {
         margin: 0;
+        padding: 0;
         font-family: 'Poppins', sans-serif;
-        color: white;
         background: url('https://files.catbox.moe/z4jyuq.jpg') no-repeat center center fixed;
         background-size: cover;
-        text-shadow: 1px 1px 4px black;
+        color: white;
+        text-align: center;
     }
     .container {
-        padding: 20px;
-        backdrop-filter: blur(5px);
-        background: rgba(0,0,0,0.5);
-        max-width: 800px;
-        margin: auto;
-        border-radius: 15px;
+        margin-top: 50px;
     }
-    h1, h2 {
-        text-align: center;
-        color: #ffd700;
-    }
-    .benefit {
-        margin: 20px 0;
-        padding: 15px;
-        border: 1px solid rgba(255,255,255,0.3);
-        border-radius: 10px;
-        background: rgba(0,0,0,0.4);
-    }
-    .btn-container {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        flex-wrap: wrap;
-        margin-top: 20px;
+    h1 {
+        font-size: 28px;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
     }
     .btn {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 30px;
+        display: inline-block;
+        margin: 15px;
+        padding: 15px 25px;
+        font-size: 18px;
         color: white;
-        font-size: 16px;
+        border: none;
+        border-radius: 50px;
+        background: linear-gradient(45deg, #ff004c, #ff6600);
         cursor: pointer;
-        animation: float 2s infinite ease-in-out;
         text-decoration: none;
+        box-shadow: 0 0 20px rgba(255, 102, 0, 0.8);
+        animation: floating 3s ease-in-out infinite;
+        transition: transform 0.2s, box-shadow 0.2s;
     }
-    .btn:nth-child(1) { background: #ff6600; animation-delay: 0s; }
-    .btn:nth-child(2) { background: #00ccff; animation-delay: 0.3s; }
-    .btn:nth-child(3) { background: #25D366; animation-delay: 0.6s; }
-    .btn:nth-child(4) { background: #ff1493; animation-delay: 0.9s; }
-
-    @keyframes float {
-        0%, 100% { transform: translateY(0); }
+    .btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(255, 102, 0, 1);
+    }
+    @keyframes floating {
+        0% { transform: translateY(0px); }
         50% { transform: translateY(-8px); }
+        100% { transform: translateY(0px); }
     }
 </style>
+<script>
+function salinDana() {
+    const nomorDana = "081234567890"; // ganti dengan nomor Dana kamu
+    navigator.clipboard.writeText(nomorDana).then(() => {
+        alert("Nomor Dana berhasil disalin: " + nomorDana);
+    });
+}
+</script>
 </head>
 <body>
+
 <div class="container">
-    <h1>📜 Daftar Paket & Benefit</h1>
-
-    <div class="benefit">
-        <h2>Script Nika Telegram</h2>
-        <p>Owner: 150.000<br>Patnert: 110.000<br>Reseller: 60.000</p>
-        <ul>
-            <li>Script Bug Gacor</li>
-            <li>Bisa Add Database Sendiri</li>
-            <li>Jamin Balmod Kalo Usaha</li>
-        </ul>
-    </div>
-
-    <div class="benefit">
-        <h2>Script Sasuke Telegram</h2>
-        <p>Owner: 170.000<br>Patnert: 110.000<br>Reseller: 60.000</p>
-        <ul>
-            <li>Script Bug Gacor</li>
-            <li>Bisa Add Database Sendiri</li>
-            <li>Jamin Balmod Kalo Usaha</li>
-            <li>Dapat Sc No Enc Bagi Owner</li>
-        </ul>
-    </div>
-
-    <div class="benefit">
-        <h2>Patnert Function Bug</h2>
-        <p>Harga: 100.000</p>
-        <ul>
-            <li>Dapat Function Bug Setiap Update</li>
-            <li>Bebas Request Function Kalo Ada Celah</li>
-        </ul>
-    </div>
-
-    <div class="benefit">
-        <h2>Patnert Biasa</h2>
-        <ul>
-            <li>Get Reseller Sasuke Via Tele</li>
-            <li>Get Patnert Domain Via Wa</li>
-            <li>Get Reseller Domain Via Wa</li>
-            <li>Get Sc No Enc Domain Full Update</li>
-            <li>Free Admin Chanel</li>
-            <li>Free Base Wa Atau Tele</li>
-            <li>Get Function Bug</li>
-            <li>Get Mursc</li>
-            <li>Get Admin Ubot</li>
-            <li>Di Promosiin 24x1</li>
-            <li>Dll</li>
-        </ul>
-    </div>
-
-    <div class="benefit">
-        <h2>Patnert Pribadi</h2>
-        <ul>
-            <li>All Acces Sasuke Telegram</li>
-            <li>All Acces Nika Telegram</li>
-            <li>All Acces Script Dominan</li>
-            <li>Free Admin Chanel Telegram</li>
-            <li>Free Base 100 Wa Atau Tele</li>
-            <li>Get Function Bug</li>
-            <li>Get Mursc</li>
-            <li>Get Admin Ubot</li>
-            <li>Di Promosiin 24x2</li>
-            <li>Support Balmod</li>
-            <li>Sama Sama Naik Nama</li>
-            <li>Dll</li>
-        </ul>
-    </div>
-
-    <div class="btn-container">
-        <a href="" class="btn">💳 QRIS</a>
-        <a href="083862861689" class="btn">💰 DANA</a>
-        <a href="t.me/informationsasuke" class="btn">📢 Channel</a>
-        <a href="t.me/asepnotdev" class="btn">💬 Chat Owner</a>
-    </div>
+    <h1>Sale Script And Patnert By Asep</h1>
+    <a href="https://example.com/qris.png" target="_blank" class="btn">💳 QRIS</a>
+    <button onclick="salinDana()" class="btn">📲 Salin Nomor Dana</button>
+    <a href="https://t.me/informationsasuke" target="_blank" class="btn">📢 Channel Telegram</a>
+    <a href="https://t.me/asepnotdev" target="_blank" class="btn">👤 Telegram Owner</a>
 </div>
+
 </body>
 </html>
