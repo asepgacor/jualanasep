@@ -1,151 +1,108 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Benefit Produk Asep</title>
+  <title>Halaman Jualan Asep</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *{margin:0;padding:0;box-sizing:border-box}
     :root{
-      --grad-1: rgba(26,42,108,0.7);
-      --grad-2: rgba(58,96,115,0.7);
-      --grad-3: rgba(0,255,135,0.7);
-      --btn-grad: linear-gradient(90deg,#00c6ff,#0072ff,#00ff87);
-      --glass: rgba(255,255,255,0.08);
-      --shadow: 0 8px 25px rgba(0,0,0,.3);
+      --g1:rgba(26,42,108,.7);
+      --g2:rgba(106,13,173,.65);
+      --g3:rgba(0,255,135,.6);
+      --glass:rgba(255,255,255,.08);
+      --btn-grad:linear-gradient(90deg,#00c6ff,#0072ff,#00ff87);
+      --shadow:0 8px 25px rgba(0,0,0,.3);
     }
     body{
-      font-family:'Poppins',sans-serif;
+      font-family:'Poppins',sans-serif;color:#fff;min-height:100vh;
       background:
-        linear-gradient(135deg,var(--grad-1),var(--grad-2),var(--grad-3)),
-        url('https://files.catbox.moe/z4jyuq.jpg') no-repeat center/cover fixed;
-      color:#fff; min-height:100vh;
+        linear-gradient(135deg,var(--g1),var(--g2),var(--g3)),
+        url('https://files.catbox.moe/z4jyuq.jpg') center/cover fixed no-repeat;
     }
     header{
-      position:sticky; top:0; z-index:10;
-      background: rgba(0,0,0,.5);
-      backdrop-filter: blur(6px);
-      box-shadow: 0 2px 20px rgba(0,0,0,.4);
-      text-align:center; padding:22px 12px; letter-spacing:.5px;
-      font-weight:700; font-size:28px;
+      position:sticky;top:0;z-index:10;text-align:center;
+      background:rgba(0,0,0,.5);backdrop-filter:blur(6px);
+      padding:22px 12px;font-size:28px;font-weight:700;letter-spacing:.5px;
+      box-shadow:0 2px 20px rgba(0,0,0,.4)
     }
-    .wrap{ max-width:1100px; margin:0 auto; padding:24px; }
-
-    /* GRID PILIHAN */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
-      gap:18px;
-      margin-top:14px;
-    }
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    .sub{opacity:.9;margin-top:6px}
+    /* Kartu kategori/produk */
+    .grid{display:grid;gap:18px;margin-top:18px;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
     .card{
-      background: var(--glass);
-      border-radius:18px;
-      padding:18px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      transition: transform .25s ease, box-shadow .25s ease;
-      display:flex; flex-direction:column; gap:10px;
+      background:var(--glass);backdrop-filter:blur(10px);border-radius:18px;
+      padding:18px;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;
+      display:flex;flex-direction:column;gap:10px
     }
-    .card:hover{ transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,.4); }
-    .title{ font-size:18px; font-weight:700; }
-    .price{ font-size:14px; opacity:.9; line-height:1.5; }
+    .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,.4)}
+    .title{font-size:18px;font-weight:700}
+    .price{font-size:14px;opacity:.95;line-height:1.5}
     .btn{
-      align-self:flex-start;
-      background: var(--btn-grad);
-      background-size:200% 200%;
-      color:#fff; border:none; border-radius:28px;
-      padding:10px 16px; font-weight:600; cursor:pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,.25);
-      transition: transform .2s ease, box-shadow .2s ease, background-position .2s ease;
+      align-self:flex-start;background:var(--btn-grad);background-size:200% 200%;
+      color:#fff;border:none;border-radius:28px;padding:10px 16px;font-weight:600;cursor:pointer;
+      box-shadow:0 4px 15px rgba(0,0,0,.25);
+      transition:transform .2s,box-shadow .2s,background-position .2s
     }
-    .btn:hover{ transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.35); background-position:right center; }
-
-    /* DONASI / KONTAK */
-    .donasi{
-      margin:28px 0 10px; text-align:center;
-      display:flex; flex-wrap:wrap; gap:12px; justify-content:center;
+    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.35);background-position:right center}
+    /* Donasi & kontak */
+    .donasi{margin:28px 0 10px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+    .donasi a,.donasi button{
+      background:linear-gradient(45deg,#6a0dad,#1a2a6c,#00ff87);background-size:200% 200%;
+      color:#fff;text-decoration:none;border:none;cursor:pointer;
+      padding:12px 20px;border-radius:30px;font-weight:600;
+      box-shadow:0 4px 15px rgba(0,0,0,.3);transition:.25s
     }
-    .donasi a, .donasi button{
-      background: linear-gradient(45deg,#6a0dad,#1a2a6c,#00ff87);
-      background-size:200% 200%;
-      color:#fff; text-decoration:none; border:none; cursor:pointer;
-      padding:12px 20px; border-radius:30px; font-weight:600;
-      box-shadow: 0 4px 15px rgba(0,0,0,.3);
-      transition:.25s ease;
-    }
-    .donasi a:hover, .donasi button:hover{
-      transform: translateY(-2px) scale(1.02);
-      background-position:right center;
-      box-shadow: 0 8px 22px rgba(0,0,0,.4);
-    }
-
-    /* MODAL */
-    .modal{
-      position:fixed; inset:0; display:none; place-items:center;
-      background: rgba(0,0,0,.55); z-index:50; padding:20px;
-    }
-    .modal.show{ display:grid; }
+    .donasi a:hover,.donasi button:hover{transform:translateY(-2px) scale(1.02);background-position:right center;box-shadow:0 8px 22px rgba(0,0,0,.4)}
+    /* Modal benefit */
+    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.55);z-index:50;padding:20px}
+    .modal.show{display:grid}
     .modal-card{
-      width:min(720px,100%); max-height:80vh; overflow:auto;
-      background: rgba(20,20,30,.8);
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow: 0 20px 60px rgba(0,0,0,.6);
-      border-radius:18px; padding:20px; backdrop-filter: blur(10px);
-      animation: pop .2s ease;
+      width:min(720px,100%);max-height:80vh;overflow:auto;border-radius:18px;padding:20px;
+      background:rgba(20,20,30,.85);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 20px 60px rgba(0,0,0,.6);animation:pop .2s ease
     }
-    @keyframes pop{ from{ transform:scale(.96); opacity:.5 } to{ transform:scale(1); opacity:1 } }
-    .modal-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
-    .modal-title{ font-size:20px; font-weight:700; }
-    .close{ background:transparent; border:1px solid rgba(255,255,255,.2); color:#fff; border-radius:10px; padding:8px 12px; cursor:pointer; }
-    .badge{ display:inline-block; padding:4px 10px; border-radius:20px; font-size:12px; margin:8px 6px 0 0; background:rgba(0,255,135,.15); border:1px solid rgba(0,255,135,.35); }
-    .list{ margin-top:12px; padding-left:18px; }
-    .list li{ margin:6px 0; line-height:1.5; }
-
-    /* TOAST */
-    .toast{
-      position:fixed; left:50%; bottom:24px; transform: translateX(-50%) translateY(20px);
-      background: rgba(0,0,0,.8); color:#fff; padding:10px 16px; border-radius:12px;
-      opacity:0; pointer-events:none; transition:.25s ease; z-index:60;
-      border:1px solid rgba(255,255,255,.12);
-    }
-    .toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
-
-    /* LOADING */
-    .loading{
-      position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
-      background: rgba(0,0,0,.85); z-index:80;
-    }
-    .spinner{
-      width:50px; height:50px; border:5px solid rgba(255,255,255,.2);
-      border-top:5px solid #00ff87; border-radius:50%; animation: spin 1s linear infinite;
-    }
-    @keyframes spin{ to{ transform: rotate(360deg); } }
-
-    @media (max-width:600px){
-      header{ font-size:22px; padding:18px 10px; }
-    }
+    @keyframes pop{from{transform:scale(.96);opacity:.5}to{transform:scale(1);opacity:1}}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+    .modal-title{font-size:20px;font-weight:700}
+    .close{background:transparent;border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:10px;padding:8px 12px;cursor:pointer}
+    .badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:12px;margin:8px 6px 0 0;
+      background:rgba(0,255,135,.15);border:1px solid rgba(0,255,135,.35)}
+    .list{margin-top:12px;padding-left:18px}
+    .list li{margin:6px 0;line-height:1.5}
+    /* Toast copy */
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);
+      background:rgba(0,0,0,.85);color:#fff;padding:10px 16px;border-radius:12px;opacity:0;pointer-events:none;
+      border:1px solid rgba(255,255,255,.12);transition:.25s;z-index:60}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    /* Loading */
+    .loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.85);z-index:80}
+    .spinner{width:50px;height:50px;border:5px solid rgba(255,255,255,.2);border-top:5px solid #00ff87;border-radius:50%;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @media (max-width:600px){header{font-size:22px;padding:18px 10px}}
   </style>
 </head>
 <body>
-  <!-- LOADING -->
+  <!-- Loading -->
   <div class="loading"><div class="spinner"></div></div>
 
-  <header>Benefit Produk Asep</header>
+  <header>Halaman Jualan Asep — Benefit & Harga</header>
 
   <main class="wrap">
-    <p style="opacity:.95">Pilih kategori untuk melihat <b>benefit</b> secara lengkap.</p>
+    <p class="sub">Klik <b>Benefitnya</b> pada masing‑masing paket untuk lihat detail.</p>
 
-    <!-- GRID PILIHAN KATEGORI -->
-    <div id="grid" class="grid"></div>
+    <!-- GRID PAKET -->
+    <section class="grid" id="paketGrid"></section>
 
-    <!-- DONASI & KONTAK -->
-    <div class="Payment Asep">
-    <a href="https://link-qris-kamu.com" target="_blank">📷 Qris Asep</a>
-    <button onclick="copyDana()">💰 Dana Asep</button>
-    <a href="https://t.me/informationsasuke" target="_blank">📢 Channel Telegram</a>
-    <a href="https://t.me/asepnotdev" target="_blank">👤 Chat Owner</a>
+    <!-- TOMBOL DONASI & KONTAK -->
+    <div class="Payment Asep" style="margin-top:32px">
+      <!-- Ganti link berikut sesuai punyamu -->
+      <a href="https://link-qris-kamu.com" target="_blank">💳 Qris Asep</a>
+      <button id="btnDana">💰 Dana Asep</button>
+      <a href="https://t.me/informationsasuke" target="_blank">📢 Channel Telegram</a>
+      <a href="https://t.me/asepnotdev" target="_blank">👤 Chat Owner</a>
     </div>
   </main>
 
@@ -153,11 +110,11 @@
   <div id="modal" class="modal" aria-modal="true" role="dialog">
     <div class="modal-card">
       <div class="modal-head">
-        <div style="display:flex; flex-direction:column;">
-          <div id="modalTitle" class="modal-title">Judul</div>
+        <div>
+          <div id="modalTitle" class="modal-title">Judul Paket</div>
           <div id="modalPrices"></div>
         </div>
-        <button class="close" id="closeModal">Tutup</button>
+        <button id="closeModal" class="close">Tutup</button>
       </div>
       <div id="modalBenefits"></div>
     </div>
@@ -167,54 +124,53 @@
   <div id="toast" class="toast">Tersalin.</div>
 
   <script>
-    // ----- DATA DASAR -----
-    const danaNumber = "083862861689"; // nomor Dana
-    const kategori = [
+    // ====== DATA ======
+    const danaNumber = "083862861689"; // ganti sesuai nomor Dana kamu
+
+    const paket = [
       {
-        id: "nika",
-        title: "Script Nika Telegram",
-        prices: [
-          { label: "Owner", value: "150.000" },
-          { label: "Patnert", value: "110.000" },
-          { label: "Reseller", value: "60.000" }
+        id:"nika",
+        title:"Script Nika Telegram",
+        prices:[
+          {label:"Owner", value:"150.000"},
+          {label:"Patnert", value:"110.000"},
+          {label:"Reseller", value:"60.000"},
         ],
-        benefits: [
-          "Script Bug Gacor",
-          "Bisa Add Database Sendiri",
-          "Jamin Balmod Kalo Usaha"
-        ]
-      },
-      {
-        id: "sasuke",
-        title: "Script Sasuke Telegram",
-        prices: [
-          { label: "Owner", value: "170.000" },
-          { label: "Patnert", value: "110.000" },
-          { label: "Reseller", value: "60.000" }
-        ],
-        benefits: [
+        benefits:[
           "Script Bug Gacor",
           "Bisa Add Database Sendiri",
           "Jamin Balmod Kalo Usaha",
-          "Dapat Sc No Enc Bagi Owner"
-        ]
-      },
-      {
-        id: "patnert-func",
-        title: "Patnert Function Bug",
-        prices: [
-          { label: "", value: "100.000" }
         ],
-        benefits: [
-          "Dapat Function Bug Setiap Update",
-          "Bebas Request Function Kalo Ada Celah"
-        ]
       },
       {
-        id: "patnert-biasa",
-        title: "Patnert Biasa",
-        prices: [],
-        benefits: [
+        id:"sasuke",
+        title:"Script Sasuke Telegram",
+        prices:[
+          {label:"Owner", value:"170.000"},
+          {label:"Patnert", value:"110.000"},
+          {label:"Reseller", value:"60.000"},
+        ],
+        benefits:[
+          "Script Bug Gacor",
+          "Bisa Add Database Sendiri",
+          "Jamin Balmod Kalo Usaha",
+          "Dapat Sc No Enc Bagi Owner",
+        ],
+      },
+      {
+        id:"func",
+        title:"Patnert Function Bug",
+        prices:[{label:"Harga", value:"100.000"}],
+        benefits:[
+          "Dapat Function Bug Setiap Update",
+          "Bebas Request Function Kalo Ada Celah",
+        ],
+      },
+      {
+        id:"biasa",
+        title:"Patnert Biasa",
+        prices:[{label:"Harga", value:"140.000"}], // sesuai permintaan
+        benefits:[
           "Get Reseller Sasuke Via Tele",
           "Get Patnert Domain Via Wa",
           "Get Reseller Domain Via Wa",
@@ -225,14 +181,14 @@
           "Get Mursc",
           "Get Admin Ubot",
           "Di Promosiin 24x1",
-          "Dll"
-        ]
+          "Dll",
+        ],
       },
       {
-        id: "patnert-pribadi",
-        title: "Patnert Pirbadi",
-        prices: [],
-        benefits: [
+        id:"pribadi",
+        title:"Patnert Pribadi",
+        prices:[{label:"Harga", value:"330.000"}], // sesuai permintaan
+        benefits:[
           "All Acces Sasuke Telegram",
           "All Acces Nika Telegram",
           "All Acces Script Dominan",
@@ -244,85 +200,79 @@
           "Di Promosiin 24x2",
           "Support Balmod",
           "Sama Sama Naik Nama",
-          "Dll"
-        ]
-      }
+          "Dll",
+        ],
+      },
     ];
 
-    // ----- RENDER GRID KATEGORI -----
-    const grid = document.getElementById('grid');
-    kategori.forEach(item => {
-      const el = document.createElement('div');
-      el.className = 'card';
+    // ====== RENDER GRID ======
+    const grid = document.getElementById("paketGrid");
+    paket.forEach(p=>{
+      const el = document.createElement("div");
+      el.className = "card";
       el.innerHTML = `
-        <div class="title">${item.title}</div>
-        ${item.prices.length ? `
-          <div class="price">
-            ${item.prices.map(p => (p.label ? `- <b>${p.label}</b> ${p.value}` : `- ${p.value}`)).join('<br>')}
-          </div>` : `<div class="price" style="opacity:.8">Klik untuk melihat benefit lengkap</div>`
-        }
-        <button class="btn" data-id="${item.id}">Benefitnya</button>
+        <div class="title">${p.title}</div>
+        <div class="price">
+          ${p.prices.length
+            ? p.prices.map(pr => `- <b>${pr.label}</b> ${pr.value}`).join("<br>")
+            : `Klik untuk melihat benefit lengkap`}
+        </div>
+        <button class="btn" data-id="${p.id}">✨ Benefitnya</button>
       `;
       grid.appendChild(el);
     });
 
-    // ----- MODAL LOGIC -----
-    const modal = document.getElementById('modal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalPrices = document.getElementById('modalPrices');
-    const modalBenefits = document.getElementById('modalBenefits');
-    const closeModal = document.getElementById('closeModal');
+    // ====== MODAL ======
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalPrices = document.getElementById("modalPrices");
+    const modalBenefits = document.getElementById("modalBenefits");
+    const closeModal = document.getElementById("closeModal");
 
-    grid.addEventListener('click', e => {
-      const btn = e.target.closest('button.btn');
+    grid.addEventListener("click",(e)=>{
+      const btn = e.target.closest("button.btn");
       if(!btn) return;
-      const id = btn.getAttribute('data-id');
-      const item = kategori.find(k => k.id === id);
+      const id = btn.getAttribute("data-id");
+      const item = paket.find(x=>x.id===id);
       if(!item) return;
 
       modalTitle.textContent = item.title;
-
-      if(item.prices.length){
-        modalPrices.innerHTML = item.prices
-          .map(p => `<span class="badge">${p.label ? p.label+': ' : ''}${p.value}</span>`).join('');
-      } else {
-        modalPrices.innerHTML = '';
-      }
+      modalPrices.innerHTML = item.prices.map(pr =>
+        `<span class="badge">${pr.label ? pr.label + ": " : ""}${pr.value}</span>`
+      ).join("");
 
       modalBenefits.innerHTML = `
         <ul class="list">
-          ${item.benefits.map(b => `<li>• ${b}</li>`).join('')}
+          ${item.benefits.map(b=>`<li>• ${b}</li>`).join("")}
         </ul>
       `;
-      modal.classList.add('show');
+      modal.classList.add("show");
     });
 
-    closeModal.addEventListener('click', () => modal.classList.remove('show'));
-    modal.addEventListener('click', (e) => {
-      if(e.target === modal) modal.classList.remove('show');
-    });
+    closeModal.addEventListener("click",()=> modal.classList.remove("show"));
+    modal.addEventListener("click",(e)=>{ if(e.target===modal) modal.classList.remove("show"); });
 
-    // ----- COPY DANA (TOAST) -----
-    const toast = document.getElementById('toast');
-    const btnDana = document.getElementById('btnDana');
-    function showToast(msg='Tersalin.'){
+    // ====== COPY DANA + TOAST ======
+    const btnDana = document.getElementById("btnDana");
+    const toast = document.getElementById("toast");
+
+    function showToast(msg){
       toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(()=> toast.classList.remove('show'), 1700);
+      toast.classList.add("show");
+      setTimeout(()=> toast.classList.remove("show"), 1700);
     }
-    btnDana.addEventListener('click', async () => {
+
+    btnDana.addEventListener("click", async ()=>{
       try{
         await navigator.clipboard.writeText(danaNumber);
-        showToast('Nomor Dana disalin: ' + danaNumber);
+        showToast("Nomor Dana disalin: " + danaNumber);
       }catch{
-        showToast('Gagal menyalin. Coba lagi.');
+        showToast("Gagal menyalin. Coba lagi.");
       }
     });
 
-    // ----- LOADING SIMULASI -----
-    setTimeout(()=> {
-      document.querySelector('.loading').style.display='none';
-    }, 900);
+    // ====== LOADING (simulasi) ======
+    setTimeout(()=>{ document.querySelector(".loading").style.display="none"; }, 800);
   </script>
 </body>
 </html>
