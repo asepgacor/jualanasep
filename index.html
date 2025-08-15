@@ -1,198 +1,221 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Jualan Script Premium</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Store Payment</title>
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
     :root {
-        --bg-dark: #0f0f0f;
-        --bg-light: #ffffff;
-        --text-dark: #ffffff;
-        --text-light: #0f0f0f;
-        --accent: #ffcc00;
-        --card-dark: rgba(255,255,255,0.05);
-        --card-light: rgba(0,0,0,0.05);
-        --shadow: 0 4px 20px rgba(0,0,0,0.2);
+        --bg-dark: rgba(0, 0, 0, 0.7);
+        --bg-light: rgba(255, 255, 255, 0.7);
+        --text-dark: #fff;
+        --text-light: #000;
+        --primary-dark: #d4af37;
+        --primary-light: #4a90e2;
     }
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
-    }
+
     body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: url('https://files.catbox.moe/z4jyuq.jpg') no-repeat center center/cover;
+        transition: all 0.4s ease-in-out;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
         background: var(--bg-dark);
-        color: var(--text-dark);
-        transition: background 0.3s, color 0.3s;
+        backdrop-filter: blur(6px);
+        z-index: -1;
+        transition: background 0.4s ease-in-out;
     }
-    body.light {
-        background: var(--bg-light);
-        color: var(--text-light);
-    }
-    header {
+
+    .container {
         text-align: center;
-        padding: 2rem 1rem;
-        background: linear-gradient(45deg, #ffcc00, #ff8800);
-        color: #000;
-        font-size: 1.5rem;
-        font-weight: 700;
-        position: sticky;
-        top: 0;
-        z-index: 10;
+        padding: 20px;
+        color: var(--text-dark);
     }
-    .toggle-theme {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        padding: 0.5rem 1rem;
-        background: var(--accent);
-        color: #000;
-        border: none;
-        cursor: pointer;
-        font-weight: 600;
-        border-radius: 5px;
-        transition: transform 0.2s;
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
     }
-    .toggle-theme:hover {
+
+    .btn-group {
+        margin: 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1rem;
+        color: var(--text-dark);
+        border: 2px solid var(--primary-dark);
+        background: transparent;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 0 10px var(--primary-dark);
+    }
+
+    .btn:hover {
+        background: var(--primary-dark);
+        color: #000;
+        box-shadow: 0 0 20px var(--primary-dark);
         transform: scale(1.05);
     }
-    .container {
-        max-width: 1200px;
-        margin: auto;
-        padding: 2rem 1rem;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
+
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
     }
+
     .card {
-        background: var(--card-dark);
+        background: rgba(255,255,255,0.1);
+        padding: 20px;
         border-radius: 15px;
-        padding: 1.5rem;
-        box-shadow: var(--shadow);
-        backdrop-filter: blur(10px);
-        transition: transform 0.3s, background 0.3s;
+        backdrop-filter: blur(4px);
+        width: 250px;
+        transition: all 0.3s ease-in-out;
+        border: 1px solid var(--primary-dark);
+        color: var(--text-dark);
     }
-    body.light .card {
-        background: var(--card-light);
-    }
+
     .card:hover {
         transform: translateY(-5px);
+        box-shadow: 0 0 20px var(--primary-dark);
     }
-    .card h2 {
-        color: var(--accent);
-        margin-bottom: 0.5rem;
+
+    .toggle-mode {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        border-radius: 20px;
+        background: var(--primary-dark);
+        border: none;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
     }
-    .price {
-        font-size: 1.2rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
+
+    .toast {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--primary-dark);
+        color: #000;
+        padding: 10px 15px;
+        border-radius: 10px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
     }
-    ul {
-        list-style: none;
+
+    .toast.show {
+        opacity: 1;
+        transform: translateY(0);
     }
-    ul li {
-        margin: 0.5rem 0;
-        padding-left: 1.2rem;
-        position: relative;
+
+    /* Light Mode */
+    body.light .overlay {
+        background: var(--bg-light);
     }
-    ul li::before {
-        content: "✔";
-        position: absolute;
-        left: 0;
-        color: var(--accent);
+
+    body.light .container, 
+    body.light .card, 
+    body.light .btn {
+        color: var(--text-light);
     }
-    footer {
-        text-align: center;
-        padding: 1rem;
-        margin-top: 2rem;
-        font-size: 0.9rem;
-        opacity: 0.7;
+
+    body.light .btn {
+        border-color: var(--primary-light);
+        box-shadow: 0 0 10px var(--primary-light);
+    }
+
+    body.light .btn:hover {
+        background: var(--primary-light);
+        color: #fff;
+        box-shadow: 0 0 20px var(--primary-light);
+    }
+
+    body.light .card {
+        border-color: var(--primary-light);
+    }
+
+    body.light .toggle-mode {
+        background: var(--primary-light);
+        color: #fff;
+    }
+
+    body.light .toast {
+        background: var(--primary-light);
+        color: #fff;
     }
 </style>
 </head>
 <body>
-    <header>
-        💎 Script Premium Telegram & WhatsApp
-        <button class="toggle-theme" onclick="toggleTheme()">🌙/☀</button>
-    </header>
+<div class="overlay"></div>
 
-    <div class="container">
-        <div class="card">
-            <h2>Script Nika Telegram</h2>
-            <p class="price">Owner: 150.000 | Partner: 110.000 | Reseller: 60.000</p>
-            <ul>
-                <li>Script Bug Gacor</li>
-                <li>Bisa Add Database Sendiri</li>
-                <li>Jamin Balmod Kalau Usaha</li>
-            </ul>
-        </div>
+<div class="container">
+    <h1>💳 Payment & Store</h1>
+    <p>Pilih metode pembayaran atau hubungi kami.</p>
 
-        <div class="card">
-            <h2>Script Sasuke Telegram</h2>
-            <p class="price">Owner: 170.000 | Partner: 110.000 | Reseller: 60.000</p>
-            <ul>
-                <li>Script Bug Gacor</li>
-                <li>Bisa Add Database Sendiri</li>
-                <li>Jamin Balmod Kalau Usaha</li>
-                <li>Dapat SC No Enc Bagi Owner</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2>Partner Function Bug</h2>
-            <p class="price">100.000</p>
-            <ul>
-                <li>Dapat Function Bug Setiap Update</li>
-                <li>Bebas Request Function Kalau Ada Celah</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2>Partner Biasa</h2>
-            <ul>
-                <li>Get Reseller Sasuke Via Tele</li>
-                <li>Get Partner Domain Via WA</li>
-                <li>Get Reseller Domain Via WA</li>
-                <li>Get SC No Enc Domain Full Update</li>
-                <li>Free Admin Channel</li>
-                <li>Free Base WA atau Tele</li>
-                <li>Get Function Bug</li>
-                <li>Get Mursc</li>
-                <li>Get Admin Ubot</li>
-                <li>Dipromosikan 24x1</li>
-                <li>Dll</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2>Partner Pribadi</h2>
-            <ul>
-                <li>All Access Sasuke Telegram</li>
-                <li>All Access Nika Telegram</li>
-                <li>All Access Script Dominan</li>
-                <li>Free Admin Channel Telegram</li>
-                <li>Free Base 100 WA atau Tele</li>
-                <li>Get Function Bug</li>
-                <li>Get Mursc</li>
-                <li>Get Admin Ubot</li>
-                <li>Dipromosikan 24x2</li>
-                <li>Support Balmod</li>
-                <li>Sama-sama Naik Nama</li>
-                <li>Dll</li>
-            </ul>
-        </div>
+    <div class="btn-group">
+        <a href="https://link.qris.kamu" class="btn">📷 QRIS</a>
+        <button class="btn" onclick="copyDana()">💰 DANA</button>
+        <a href="https://t.me/channel_kamu" class="btn">📢 Channel Telegram</a>
+        <a href="https://t.me/owner_kamu" class="btn">👤 Tele Owner</a>
     </div>
 
-    <footer>
-        © 2025 Script Premium Store | All Rights Reserved
-    </footer>
+    <div class="cards">
+        <div class="card">
+            <h3>Owner</h3>
+            <p>Full akses & kontrol penuh sistem.</p>
+        </div>
+        <div class="card">
+            <h3>Partner</h3>
+            <p>Kolaborasi eksklusif dengan benefit spesial.</p>
+        </div>
+        <div class="card">
+            <h3>Reseller</h3>
+            <p>Dapatkan harga khusus untuk penjualan ulang.</p>
+        </div>
+    </div>
+</div>
+
+<button class="toggle-mode" onclick="toggleMode()">🌙 Dark</button>
+
+<div class="toast" id="toast">Nomor DANA disalin!</div>
 
 <script>
-function toggleTheme() {
-    document.body.classList.toggle("light");
-}
+    let isLight = false;
+
+    function toggleMode() {
+        document.body.classList.toggle('light');
+        isLight = !isLight;
+        document.querySelector('.toggle-mode').innerText = isLight ? '☀️ Light' : '🌙 Dark';
+    }
+
+    function copyDana() {
+        const danaNumber = "08123456789"; // Ganti dengan nomor DANA kamu
+        navigator.clipboard.writeText(danaNumber).then(() => {
+            const toast = document.getElementById("toast");
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 2000);
+        });
+    }
 </script>
+
 </body>
 </html>
