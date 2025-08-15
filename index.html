@@ -3,217 +3,326 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sell Produk Asep</title>
+  <title>Benefit Produk Asep</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root{
+      --grad-1: rgba(26,42,108,0.7);
+      --grad-2: rgba(58,96,115,0.7);
+      --grad-3: rgba(0,255,135,0.7);
+      --btn-grad: linear-gradient(90deg,#00c6ff,#0072ff,#00ff87);
+      --glass: rgba(255,255,255,0.08);
+      --shadow: 0 8px 25px rgba(0,0,0,.3);
     }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: 
-        linear-gradient(135deg, rgba(26,42,108,0.7), rgba(58,96,115,0.7), rgba(0,255,135,0.7)),
-        url('https://files.catbox.moe/z4jyuq.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      min-height: 100vh;
+    body{
+      font-family:'Poppins',sans-serif;
+      background:
+        linear-gradient(135deg,var(--grad-1),var(--grad-2),var(--grad-3)),
+        url('https://files.catbox.moe/z4jyuq.jpg') no-repeat center/cover fixed;
+      color:#fff; min-height:100vh;
     }
-    header {
-      background: rgba(0,0,0,0.5);
-      color: white;
-      padding: 25px 10px;
-      text-align: center;
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.4);
-      backdrop-filter: blur(5px);
+    header{
+      position:sticky; top:0; z-index:10;
+      background: rgba(0,0,0,.5);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 20px rgba(0,0,0,.4);
+      text-align:center; padding:22px 12px; letter-spacing:.5px;
+      font-weight:700; font-size:28px;
     }
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      padding: 30px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease;
+    .wrap{ max-width:1100px; margin:0 auto; padding:24px; }
+
+    /* GRID PILIHAN */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+      margin-top:14px;
     }
-    .container.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .product {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    .card{
+      background: var(--glass);
+      border-radius:18px;
+      padding:18px;
+      box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
+      transition: transform .25s ease, box-shadow .25s ease;
+      display:flex; flex-direction:column; gap:10px;
     }
-    .product:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    .card:hover{ transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,.4); }
+    .title{ font-size:18px; font-weight:700; }
+    .price{ font-size:14px; opacity:.9; line-height:1.5; }
+    .btn{
+      align-self:flex-start;
+      background: var(--btn-grad);
+      background-size:200% 200%;
+      color:#fff; border:none; border-radius:28px;
+      padding:10px 16px; font-weight:600; cursor:pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,.25);
+      transition: transform .2s ease, box-shadow .2s ease, background-position .2s ease;
     }
-    .product img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      transition: transform 0.4s ease;
+    .btn:hover{ transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.35); background-position:right center; }
+
+    /* DONASI / KONTAK */
+    .donasi{
+      margin:28px 0 10px; text-align:center;
+      display:flex; flex-wrap:wrap; gap:12px; justify-content:center;
     }
-    .product:hover img {
-      transform: scale(1.08);
+    .donasi a, .donasi button{
+      background: linear-gradient(45deg,#6a0dad,#1a2a6c,#00ff87);
+      background-size:200% 200%;
+      color:#fff; text-decoration:none; border:none; cursor:pointer;
+      padding:12px 20px; border-radius:30px; font-weight:600;
+      box-shadow: 0 4px 15px rgba(0,0,0,.3);
+      transition:.25s ease;
     }
-    .product-info {
-      padding: 20px;
-      text-align: center;
+    .donasi a:hover, .donasi button:hover{
+      transform: translateY(-2px) scale(1.02);
+      background-position:right center;
+      box-shadow: 0 8px 22px rgba(0,0,0,.4);
     }
-    .product-title {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 8px;
+
+    /* MODAL */
+    .modal{
+      position:fixed; inset:0; display:none; place-items:center;
+      background: rgba(0,0,0,.55); z-index:50; padding:20px;
     }
-    .product-price {
-      color: #00ffcc;
-      font-size: 16px;
-      margin-bottom: 15px;
-      font-weight: 500;
+    .modal.show{ display:grid; }
+    .modal-card{
+      width:min(720px,100%); max-height:80vh; overflow:auto;
+      background: rgba(20,20,30,.8);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 20px 60px rgba(0,0,0,.6);
+      border-radius:18px; padding:20px; backdrop-filter: blur(10px);
+      animation: pop .2s ease;
     }
-    .buy-btn {
-      background: linear-gradient(90deg, #00c6ff, #0072ff, #00ff87);
-      background-size: 200% 200%;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-block;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    @keyframes pop{ from{ transform:scale(.96); opacity:.5 } to{ transform:scale(1); opacity:1 } }
+    .modal-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
+    .modal-title{ font-size:20px; font-weight:700; }
+    .close{ background:transparent; border:1px solid rgba(255,255,255,.2); color:#fff; border-radius:10px; padding:8px 12px; cursor:pointer; }
+    .badge{ display:inline-block; padding:4px 10px; border-radius:20px; font-size:12px; margin:8px 6px 0 0; background:rgba(0,255,135,.15); border:1px solid rgba(0,255,135,.35); }
+    .list{ margin-top:12px; padding-left:18px; }
+    .list li{ margin:6px 0; line-height:1.5; }
+
+    /* TOAST */
+    .toast{
+      position:fixed; left:50%; bottom:24px; transform: translateX(-50%) translateY(20px);
+      background: rgba(0,0,0,.8); color:#fff; padding:10px 16px; border-radius:12px;
+      opacity:0; pointer-events:none; transition:.25s ease; z-index:60;
+      border:1px solid rgba(255,255,255,.12);
     }
-    .buy-btn:hover {
-      background-position: right center;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-      transform: translateY(-2px);
+    .toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
+
+    /* LOADING */
+    .loading{
+      position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+      background: rgba(0,0,0,.85); z-index:80;
     }
-    /* Tombol donasi */
-    .donasi {
-      text-align: center;
-      margin: 30px 0;
+    .spinner{
+      width:50px; height:50px; border:5px solid rgba(255,255,255,.2);
+      border-top:5px solid #00ff87; border-radius:50%; animation: spin 1s linear infinite;
     }
-    .donasi button,
-    .donasi a {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 25px;
-      font-size: 16px;
-      font-weight: 600;
-      color: white;
-      text-decoration: none;
-      border-radius: 30px;
-      background: linear-gradient(45deg, #6a0dad, #1a2a6c, #00ff87);
-      background-size: 200% 200%;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      border: none;
-      cursor: pointer;
-    }
-    .donasi a:hover,
-    .donasi button:hover {
-      background-position: right center;
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-    }
-    /* Loading Animation */
-    .loading {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 5px solid rgba(255, 255, 255, 0.2);
-      border-top: 5px solid #00ff87;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    @keyframes spin{ to{ transform: rotate(360deg); } }
+
+    @media (max-width:600px){
+      header{ font-size:22px; padding:18px 10px; }
     }
   </style>
 </head>
 <body>
-  <div class="loading">
-    <div class="spinner"></div>
+  <!-- LOADING -->
+  <div class="loading"><div class="spinner"></div></div>
+
+  <header>Benefit Produk Asep</header>
+
+  <main class="wrap">
+    <p style="opacity:.95">Pilih kategori untuk melihat <b>benefit</b> secara lengkap.</p>
+
+    <!-- GRID PILIHAN KATEGORI -->
+    <div id="grid" class="grid"></div>
+
+    <!-- DONASI & KONTAK -->
+    <div class="Payment Asep" style="margin-top:32px">
+      <a href="https://link-qris-kamu.com" target="_blank">📷 Qris All Payment Asep</a>
+      <button id="btnDana">💰 Nomor Dana Asep</button>
+      <a href="https://t.me/informationsasuke" target="_blank">📢 Channel Telegram</a>
+      <a href="https://t.me/asepnotdev" target="_blank">👤 Chat Owner</a>
+    </div>
+  </main>
+
+  <!-- MODAL DETAIL BENEFIT -->
+  <div id="modal" class="modal" aria-modal="true" role="dialog">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div style="display:flex; flex-direction:column;">
+          <div id="modalTitle" class="modal-title">Judul</div>
+          <div id="modalPrices"></div>
+        </div>
+        <button class="close" id="closeModal">Tutup</button>
+      </div>
+      <div id="modalBenefits"></div>
+    </div>
   </div>
 
-  <header>Sell Produk Asep</header>
-  
-  <div class="container" id="product-list"></div>
-
-  <!-- Tombol Donasi -->
-  <div class="donasi">
-    <a href="https://link-qris-kamu.com" target="_blank">📷 Donasi via QRIS</a>
-    <button onclick="copyDana()">💰 Salin Nomor Dana</button>
-    <a href="https://t.me/informationsasuke" target="_blank">📢 Channel Telegram</a>
-    <a href="https://t.me/asepnotdev" target="_blank">👤 Chat Owner</a>
-  </div>
+  <!-- TOAST -->
+  <div id="toast" class="toast">Tersalin.</div>
 
   <script>
-    const whatsappNumber = "6283848818972"; // Nomor WA
-    const danaNumber = "083862861689"; // Nomor Dana
-    const placeholderImage = "https://files.catbox.moe/z4jyuq.jpg";
-
-    const products = [
-      { name: "Script Bug Nika Tele", price: "Rp35.000", image: placeholderImage },
-      { name: "Script Bug Sasuke Tele", price: "Rp35.000", image: placeholderImage },
-      { name: "Patnert Function", price: "Rp100.000", image: placeholderImage },
-      { name: "Patnert Biasa", price: "Rp130.000", image: placeholderImage },
-      { name: "Patnert Pribadi", price: "Rp330.000", image: placeholderImage }
+    // ----- DATA DASAR -----
+    const danaNumber = "083862861689"; // nomor Dana
+    const kategori = [
+      {
+        id: "nika",
+        title: "Script Nika Telegram",
+        prices: [
+          { label: "Owner", value: "150.000" },
+          { label: "Patnert", value: "110.000" },
+          { label: "Reseller", value: "60.000" }
+        ],
+        benefits: [
+          "Script Bug Gacor",
+          "Bisa Add Database Sendiri",
+          "Jamin Balmod Kalo Usaha"
+        ]
+      },
+      {
+        id: "sasuke",
+        title: "Script Sasuke Telegram",
+        prices: [
+          { label: "Owner", value: "170.000" },
+          { label: "Patnert", value: "110.000" },
+          { label: "Reseller", value: "60.000" }
+        ],
+        benefits: [
+          "Script Bug Gacor",
+          "Bisa Add Database Sendiri",
+          "Jamin Balmod Kalo Usaha",
+          "Dapat Sc No Enc Bagi Owner"
+        ]
+      },
+      {
+        id: "patnert-func",
+        title: "Patnert Function Bug",
+        prices: [
+          { label: "", value: "100.000" }
+        ],
+        benefits: [
+          "Dapat Function Bug Setiap Update",
+          "Bebas Request Function Kalo Ada Celah"
+        ]
+      },
+      {
+        id: "patnert-biasa",
+        title: "Patnert Biasa",
+        prices: [],
+        benefits: [
+          "Get Reseller Sasuke Via Tele",
+          "Get Patnert Domain Via Wa",
+          "Get Reseller Domain Via Wa",
+          "Get Sc No Enc Domain Full Upadte",
+          "Free Admin Chanel",
+          "Free Base Wa Atau Tele",
+          "Get Function Bug",
+          "Get Mursc",
+          "Get Admin Ubot",
+          "Di Promosiin 24x1",
+          "Dll"
+        ]
+      },
+      {
+        id: "patnert-pribadi",
+        title: "Patnert Pirbadi",
+        prices: [],
+        benefits: [
+          "All Acces Sasuke Telegram",
+          "All Acces Nika Telegram",
+          "All Acces Script Dominan",
+          "Free Admin Chanel Telegram",
+          "Free Base 100 Wa Atau Tele",
+          "Get Function Bug",
+          "Get Mursc",
+          "Get Admin Ubot",
+          "Di Promosiin 24x2",
+          "Support Balmod",
+          "Sama Sama Naik Nama",
+          "Dll"
+        ]
+      }
     ];
 
-    const container = document.getElementById("product-list");
+    // ----- RENDER GRID KATEGORI -----
+    const grid = document.getElementById('grid');
+    kategori.forEach(item => {
+      const el = document.createElement('div');
+      el.className = 'card';
+      el.innerHTML = `
+        <div class="title">${item.title}</div>
+        ${item.prices.length ? `
+          <div class="price">
+            ${item.prices.map(p => (p.label ? `- <b>${p.label}</b> ${p.value}` : `- ${p.value}`)).join('<br>')}
+          </div>` : `<div class="price" style="opacity:.8">Klik untuk melihat benefit lengkap</div>`
+        }
+        <button class="btn" data-id="${item.id}">Benefitnya</button>
+      `;
+      grid.appendChild(el);
+    });
 
-    function loadProducts() {
-      products.forEach(product => {
-        const productElement = document.createElement("div");
-        productElement.classList.add("product");
+    // ----- MODAL LOGIC -----
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalPrices = document.getElementById('modalPrices');
+    const modalBenefits = document.getElementById('modalBenefits');
+    const closeModal = document.getElementById('closeModal');
 
-        productElement.innerHTML = `
-          <img src="${product.image}" alt="${product.name}">
-          <div class="product-info">
-            <div class="product-title">${product.name}</div>
-            <div class="product-price">${product.price}</div>
-            <a class="buy-btn" href="https://wa.me/${whatsappNumber}?text=Halo%20Saya%20mau%20beli%20${encodeURIComponent(product.name)}" target="_blank">💬 Beli via WhatsApp</a>
-          </div>
-        `;
-        container.appendChild(productElement);
-      });
+    grid.addEventListener('click', e => {
+      const btn = e.target.closest('button.btn');
+      if(!btn) return;
+      const id = btn.getAttribute('data-id');
+      const item = kategori.find(k => k.id === id);
+      if(!item) return;
 
-      document.querySelector(".loading").style.display = "none";
-      container.classList.add("show");
+      modalTitle.textContent = item.title;
+
+      if(item.prices.length){
+        modalPrices.innerHTML = item.prices
+          .map(p => `<span class="badge">${p.label ? p.label+': ' : ''}${p.value}</span>`).join('');
+      } else {
+        modalPrices.innerHTML = '';
+      }
+
+      modalBenefits.innerHTML = `
+        <ul class="list">
+          ${item.benefits.map(b => `<li>• ${b}</li>`).join('')}
+        </ul>
+      `;
+      modal.classList.add('show');
+    });
+
+    closeModal.addEventListener('click', () => modal.classList.remove('show'));
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) modal.classList.remove('show');
+    });
+
+    // ----- COPY DANA (TOAST) -----
+    const toast = document.getElementById('toast');
+    const btnDana = document.getElementById('btnDana');
+    function showToast(msg='Tersalin.'){
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(()=> toast.classList.remove('show'), 1700);
     }
+    btnDana.addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText(danaNumber);
+        showToast('Nomor Dana disalin: ' + danaNumber);
+      }catch{
+        showToast('Gagal menyalin. Coba lagi.');
+      }
+    });
 
-    function copyDana() {
-      navigator.clipboard.writeText(danaNumber).then(() => {
-        alert("Nomor Dana berhasil disalin: " + danaNumber);
-      }).catch(err => {
-        alert("Gagal menyalin nomor Dana");
-      });
-    }
-
-    setTimeout(loadProducts, 1500);
+    // ----- LOADING SIMULASI -----
+    setTimeout(()=> {
+      document.querySelector('.loading').style.display='none';
+    }, 900);
   </script>
 </body>
 </html>
