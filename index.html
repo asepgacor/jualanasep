@@ -99,6 +99,30 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.3);
       transform: translateY(-2px);
     }
+    /* Tombol donasi */
+    .donasi {
+      text-align: center;
+      margin: 30px 0;
+    }
+    .donasi a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      background: linear-gradient(45deg, #6a0dad, #1a2a6c, #00ff87);
+      background-size: 200% 200%;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    .donasi a:hover {
+      background-position: right center;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
     /* Loading Animation */
     .loading {
       position: fixed;
@@ -142,6 +166,14 @@
   <header>Sell Produk Asep</header>
   
   <div class="container" id="product-list"></div>
+
+  <!-- Tombol Donasi -->
+  <div class="Payment Asep">
+    <a href="https://link-qris-kamu.com" target="_blank">📷 Donasi via QRIS</a>
+    <a href="tel:+6283862861689">💰 Dana: 0838-6286-1689</a>
+    <a href="https://t.me/informationsasuke" target="_blank">📢 Channel Telegram</a>
+    <a href="https://t.me/asepnotdev" target="_blank">👤 Chat Owner</a>
+  </div>
 
   <script>
     const whatsappNumber = "6283848818972"; /* Nomor WA */
