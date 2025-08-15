@@ -1,278 +1,171 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Halaman Jualan Asep</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    :root{
-      --g1:rgba(26,42,108,.7);
-      --g2:rgba(106,13,173,.65);
-      --g3:rgba(0,255,135,.6);
-      --glass:rgba(255,255,255,.08);
-      --btn-grad:linear-gradient(90deg,#00c6ff,#0072ff,#00ff87);
-      --shadow:0 8px 25px rgba(0,0,0,.3);
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jualan Script Telegram</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        color: white;
+        margin: 0;
+        padding: 0;
+        text-align: center;
     }
-    body{
-      font-family:'Poppins',sans-serif;color:#fff;min-height:100vh;
-      background:
-        linear-gradient(135deg,var(--g1),var(--g2),var(--g3)),
-        url('https://files.catbox.moe/z4jyuq.jpg') center/cover fixed no-repeat;
+
+    h1 {
+        margin-top: 20px;
+        animation: glow 2s infinite alternate;
     }
-    header{
-      position:sticky;top:0;z-index:10;text-align:center;
-      background:rgba(0,0,0,.5);backdrop-filter:blur(6px);
-      padding:22px 12px;font-size:28px;font-weight:700;letter-spacing:.5px;
-      box-shadow:0 2px 20px rgba(0,0,0,.4)
+
+    @keyframes glow {
+        from { text-shadow: 0 0 5px #ff6, 0 0 10px #ff6; }
+        to { text-shadow: 0 0 15px #f06, 0 0 30px #f06; }
     }
-    .wrap{max-width:1100px;margin:0 auto;padding:24px}
-    .sub{opacity:.9;margin-top:6px}
-    /* Kartu kategori/produk */
-    .grid{display:grid;gap:18px;margin-top:18px;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-    .card{
-      background:var(--glass);backdrop-filter:blur(10px);border-radius:18px;
-      padding:18px;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;
-      display:flex;flex-direction:column;gap:10px
+
+    .payment {
+        margin: 30px auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
     }
-    .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,.4)}
-    .title{font-size:18px;font-weight:700}
-    .price{font-size:14px;opacity:.95;line-height:1.5}
-    .btn{
-      align-self:flex-start;background:var(--btn-grad);background-size:200% 200%;
-      color:#fff;border:none;border-radius:28px;padding:10px 16px;font-weight:600;cursor:pointer;
-      box-shadow:0 4px 15px rgba(0,0,0,.25);
-      transition:transform .2s,box-shadow .2s,background-position .2s
+
+    .payment a, .payment button {
+        background: linear-gradient(45deg, #ff6, #f06);
+        border: none;
+        padding: 12px 20px;
+        border-radius: 25px;
+        color: black;
+        font-weight: bold;
+        text-decoration: none;
+        cursor: pointer;
+        animation: float 2s infinite ease-in-out;
+        transition: transform 0.2s, box-shadow 0.2s;
     }
-    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.35);background-position:right center}
-    /* Donasi & kontak */
-    .donasi{margin:28px 0 10px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-    .donasi a,.donasi button{
-      background:linear-gradient(45deg,#6a0dad,#1a2a6c,#00ff87);background-size:200% 200%;
-      color:#fff;text-decoration:none;border:none;cursor:pointer;
-      padding:12px 20px;border-radius:30px;font-weight:600;
-      box-shadow:0 4px 15px rgba(0,0,0,.3);transition:.25s
+
+    .payment a:hover, .payment button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px #fff;
     }
-    .donasi a:hover,.donasi button:hover{transform:translateY(-2px) scale(1.02);background-position:right center;box-shadow:0 8px 22px rgba(0,0,0,.4)}
-    /* Modal benefit */
-    .modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(0,0,0,.55);z-index:50;padding:20px}
-    .modal.show{display:grid}
-    .modal-card{
-      width:min(720px,100%);max-height:80vh;overflow:auto;border-radius:18px;padding:20px;
-      background:rgba(20,20,30,.85);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);
-      box-shadow:0 20px 60px rgba(0,0,0,.6);animation:pop .2s ease
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
     }
-    @keyframes pop{from{transform:scale(.96);opacity:.5}to{transform:scale(1);opacity:1}}
-    .modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
-    .modal-title{font-size:20px;font-weight:700}
-    .close{background:transparent;border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:10px;padding:8px 12px;cursor:pointer}
-    .badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:12px;margin:8px 6px 0 0;
-      background:rgba(0,255,135,.15);border:1px solid rgba(0,255,135,.35)}
-    .list{margin-top:12px;padding-left:18px}
-    .list li{margin:6px 0;line-height:1.5}
-    /* Toast copy */
-    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);
-      background:rgba(0,0,0,.85);color:#fff;padding:10px 16px;border-radius:12px;opacity:0;pointer-events:none;
-      border:1px solid rgba(255,255,255,.12);transition:.25s;z-index:60}
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-    /* Loading */
-    .loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.85);z-index:80}
-    .spinner{width:50px;height:50px;border:5px solid rgba(255,255,255,.2);border-top:5px solid #00ff87;border-radius:50%;animation:spin 1s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    @media (max-width:600px){header{font-size:22px;padding:18px 10px}}
-  </style>
+
+    .benefit-box {
+        background: rgba(255, 255, 255, 0.1);
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 600px;
+        text-align: left;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .benefit-box h2 {
+        color: #ff6;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+
+    li {
+        margin: 5px 0;
+    }
+</style>
 </head>
 <body>
-  <!-- Loading -->
-  <div class="loading"><div class="spinner"></div></div>
 
-  <header>Halaman Jualan Asep — Benefit & Harga</header>
+<h1>Sell Script And Patnert By AsepNotDev</h1>
 
-  <main class="wrap">
-    <p class="sub">Klik <b>Benefitnya</b> pada masing‑masing paket untuk lihat detail.</p>
+<div class="payment">
+    <a href="https://link-qris-kamu.com" target="_blank">📷 Qris Asep</a>
+    <button onclick="copyDana()">💰 Dana Asep</button>
+    <a href="https://t.me/informationsasuke" target="_blank">📢 Channel Telegram</a>
+    <a href="https://t.me/asepnotdev" target="_blank">👤 Chat Owner</a>
+</div>
 
-    <!-- GRID PAKET -->
-    <section class="grid" id="paketGrid"></section>
+<div class="benefit-box">
+    <h2>📜 Script Nika Telegram</h2>
+    <p><b>Owner:</b> 150.000 | <b>Partner:</b> 110.000 | <b>Reseller:</b> 60.000</p>
+    <ul>
+        <li>Script Bug Gacor</li>
+        <li>Bisa Add Database Sendiri</li>
+        <li>Jamin Balmod Kalo Usaha</li>
+    </ul>
+</div>
 
-    <!-- TOMBOL DONASI & KONTAK -->
-    <div class="Payment Asep" style="margin-top:32px">
-      <!-- Ganti link berikut sesuai punyamu -->
-      <a href="https://link-qris-kamu.com" target="_blank">💳 Qris Asep</a>
-      <button id="btnDana">💰 Dana Asep</button>
-      <a href="https://t.me/informationsasuke" target="_blank">📢 Channel Telegram</a>
-      <a href="https://t.me/asepnotdev" target="_blank">👤 Chat Owner</a>
-    </div>
-  </main>
+<div class="benefit-box">
+    <h2>📜 Script Sasuke Telegram</h2>
+    <p><b>Owner:</b> 170.000 | <b>Partner:</b> 110.000 | <b>Reseller:</b> 60.000</p>
+    <ul>
+        <li>Script Bug Gacor</li>
+        <li>Bisa Add Database Sendiri</li>
+        <li>Jamin Balmod Kalo Usaha</li>
+        <li>Dapat Sc No Enc Bagi Owner</li>
+    </ul>
+</div>
 
-  <!-- MODAL DETAIL BENEFIT -->
-  <div id="modal" class="modal" aria-modal="true" role="dialog">
-    <div class="modal-card">
-      <div class="modal-head">
-        <div>
-          <div id="modalTitle" class="modal-title">Judul Paket</div>
-          <div id="modalPrices"></div>
-        </div>
-        <button id="closeModal" class="close">Tutup</button>
-      </div>
-      <div id="modalBenefits"></div>
-    </div>
-  </div>
+<div class="benefit-box">
+    <h2>📜 Partner Function Bug</h2>
+    <p><b>Harga:</b> 100.000</p>
+    <ul>
+        <li>Dapat Function Bug Setiap Update</li>
+        <li>Bebas Request Function Kalo Ada Celah</li>
+    </ul>
+</div>
 
-  <!-- TOAST -->
-  <div id="toast" class="toast">Tersalin.</div>
+<div class="benefit-box">
+    <h2>📜 Partner Biasa</h2>
+    <ul>
+        <li>Get Reseller Sasuke Via Tele</li>
+        <li>Get Partner Domain Via Wa</li>
+        <li>Get Reseller Domain Via Wa</li>
+        <li>Get Sc No Enc Domain Full Update</li>
+        <li>Free Admin Chanel</li>
+        <li>Free Base Wa atau Tele</li>
+        <li>Get Function Bug</li>
+        <li>Get Mursc</li>
+        <li>Get Admin Ubot</li>
+        <li>Dipromosikan 24x1</li>
+    </ul>
+</div>
 
-  <script>
-    // ====== DATA ======
-    const danaNumber = "083862861689"; // ganti sesuai nomor Dana kamu
+<div class="benefit-box">
+    <h2>📜 Partner Pribadi</h2>
+    <ul>
+        <li>All Access Sasuke Telegram</li>
+        <li>All Access Nika Telegram</li>
+        <li>All Access Script Dominan</li>
+        <li>Free Admin Chanel Telegram</li>
+        <li>Free Base 100 Wa atau Tele</li>
+        <li>Get Function Bug</li>
+        <li>Get Mursc</li>
+        <li>Get Admin Ubot</li>
+        <li>Dipromosikan 24x2</li>
+        <li>Support Balmod</li>
+        <li>Sama-sama Naik Nama</li>
+    </ul>
+</div>
 
-    const paket = [
-      {
-        id:"nika",
-        title:"Script Nika Telegram",
-        prices:[
-          {label:"Owner", value:"150.000"},
-          {label:"Patnert", value:"110.000"},
-          {label:"Reseller", value:"60.000"},
-        ],
-        benefits:[
-          "Script Bug Gacor",
-          "Bisa Add Database Sendiri",
-          "Jamin Balmod Kalo Usaha",
-        ],
-      },
-      {
-        id:"sasuke",
-        title:"Script Sasuke Telegram",
-        prices:[
-          {label:"Owner", value:"170.000"},
-          {label:"Patnert", value:"110.000"},
-          {label:"Reseller", value:"60.000"},
-        ],
-        benefits:[
-          "Script Bug Gacor",
-          "Bisa Add Database Sendiri",
-          "Jamin Balmod Kalo Usaha",
-          "Dapat Sc No Enc Bagi Owner",
-        ],
-      },
-      {
-        id:"func",
-        title:"Patnert Function Bug",
-        prices:[{label:"Harga", value:"100.000"}],
-        benefits:[
-          "Dapat Function Bug Setiap Update",
-          "Bebas Request Function Kalo Ada Celah",
-        ],
-      },
-      {
-        id:"biasa",
-        title:"Patnert Biasa",
-        prices:[{label:"Harga", value:"140.000"}], // sesuai permintaan
-        benefits:[
-          "Get Reseller Sasuke Via Tele",
-          "Get Patnert Domain Via Wa",
-          "Get Reseller Domain Via Wa",
-          "Get Sc No Enc Domain Full Upadte",
-          "Free Admin Chanel",
-          "Free Base Wa Atau Tele",
-          "Get Function Bug",
-          "Get Mursc",
-          "Get Admin Ubot",
-          "Di Promosiin 24x1",
-          "Dll",
-        ],
-      },
-      {
-        id:"pribadi",
-        title:"Patnert Pribadi",
-        prices:[{label:"Harga", value:"330.000"}], // sesuai permintaan
-        benefits:[
-          "All Acces Sasuke Telegram",
-          "All Acces Nika Telegram",
-          "All Acces Script Dominan",
-          "Free Admin Chanel Telegram",
-          "Free Base 100 Wa Atau Tele",
-          "Get Function Bug",
-          "Get Mursc",
-          "Get Admin Ubot",
-          "Di Promosiin 24x2",
-          "Support Balmod",
-          "Sama Sama Naik Nama",
-          "Dll",
-        ],
-      },
-    ];
-
-    // ====== RENDER GRID ======
-    const grid = document.getElementById("paketGrid");
-    paket.forEach(p=>{
-      const el = document.createElement("div");
-      el.className = "card";
-      el.innerHTML = `
-        <div class="title">${p.title}</div>
-        <div class="price">
-          ${p.prices.length
-            ? p.prices.map(pr => `- <b>${pr.label}</b> ${pr.value}`).join("<br>")
-            : `Klik untuk melihat benefit lengkap`}
-        </div>
-        <button class="btn" data-id="${p.id}">✨ Benefitnya</button>
-      `;
-      grid.appendChild(el);
-    });
-
-    // ====== MODAL ======
-    const modal = document.getElementById("modal");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalPrices = document.getElementById("modalPrices");
-    const modalBenefits = document.getElementById("modalBenefits");
-    const closeModal = document.getElementById("closeModal");
-
-    grid.addEventListener("click",(e)=>{
-      const btn = e.target.closest("button.btn");
-      if(!btn) return;
-      const id = btn.getAttribute("data-id");
-      const item = paket.find(x=>x.id===id);
-      if(!item) return;
-
-      modalTitle.textContent = item.title;
-      modalPrices.innerHTML = item.prices.map(pr =>
-        `<span class="badge">${pr.label ? pr.label + ": " : ""}${pr.value}</span>`
-      ).join("");
-
-      modalBenefits.innerHTML = `
-        <ul class="list">
-          ${item.benefits.map(b=>`<li>• ${b}</li>`).join("")}
-        </ul>
-      `;
-      modal.classList.add("show");
-    });
-
-    closeModal.addEventListener("click",()=> modal.classList.remove("show"));
-    modal.addEventListener("click",(e)=>{ if(e.target===modal) modal.classList.remove("show"); });
-
-    // ====== COPY DANA + TOAST ======
-    const btnDana = document.getElementById("btnDana");
-    const toast = document.getElementById("toast");
-
-    function showToast(msg){
-      toast.textContent = msg;
-      toast.classList.add("show");
-      setTimeout(()=> toast.classList.remove("show"), 1700);
+<script>
+    function copyDana() {
+        const danaNumber = "083862861689"; // Ganti dengan nomor DANA kamu
+        navigator.clipboard.writeText(danaNumber).then(() => {
+            alert("Nomor DANA berhasil disalin: " + danaNumber);
+        });
     }
+</script>
 
-    btnDana.addEventListener("click", async ()=>{
-      try{
-        await navigator.clipboard.writeText(danaNumber);
-        showToast("Nomor Dana disalin: " + danaNumber);
-      }catch{
-        showToast("Gagal menyalin. Coba lagi.");
-      }
-    });
-
-    // ====== LOADING (simulasi) ======
-    setTimeout(()=>{ document.querySelector(".loading").style.display="none"; }, 800);
-  </script>
 </body>
 </html>
