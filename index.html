@@ -3,21 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Website Jualan Asep</title>
+<title>Website Jualan Asep - Light Mode</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
     body {
         margin: 0;
         font-family: 'Poppins', sans-serif;
-        background: url('https://files.catbox.moe/z4jyuq.jpg') no-repeat center center/cover;
-        color: white;
+        background: linear-gradient(135deg, #00c6ff, #0072ff, #00ff87);
+        color: #000;
         overflow-x: hidden;
-    }
-    .overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.6);
-        z-index: -1;
     }
     header {
         text-align: center;
@@ -25,7 +19,8 @@
         font-size: 2.5em;
         font-weight: 700;
         letter-spacing: 1px;
-        text-shadow: 0 0 20px #ff00ff;
+        color: #fff;
+        text-shadow: 0 0 10px #00ff87, 0 0 20px #00c6ff;
     }
     .container {
         display: flex;
@@ -35,27 +30,27 @@
         padding: 20px;
     }
     .card {
-        background: rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.2);
         border-radius: 20px;
         padding: 20px;
         width: 320px;
         backdrop-filter: blur(10px);
-        box-shadow: 0 0 25px rgba(0,0,0,0.5);
+        box-shadow: 0 0 25px rgba(0,0,0,0.3);
         transition: transform 0.3s, box-shadow 0.3s;
     }
     .card:hover {
         transform: translateY(-10px) scale(1.05);
-        box-shadow: 0 0 35px #ff00ff;
+        box-shadow: 0 0 35px #00ff87, 0 0 25px #00c6ff;
     }
     .card h2 {
         margin-bottom: 10px;
         font-size: 1.5em;
-        color: #00ffff;
-        text-shadow: 0 0 5px #00ffff;
+        color: #00ff87;
+        text-shadow: 0 0 5px #00ff87;
     }
     .price {
         font-size: 1.2em;
-        color: #ff00ff;
+        color: #0072ff;
         font-weight: bold;
         margin-bottom: 10px;
     }
@@ -66,7 +61,7 @@
     }
     ul li::before {
         content: "✔ ";
-        color: #00ff99;
+        color: #00ff87;
     }
     .buttons {
         margin: 30px 0;
@@ -77,7 +72,7 @@
     }
     .btn {
         padding: 15px 25px;
-        background: linear-gradient(45deg, #ff00ff, #00ffff, #00ff99);
+        background: linear-gradient(45deg, #00c6ff, #0072ff, #00ff87);
         border: none;
         border-radius: 30px;
         color: white;
@@ -85,16 +80,16 @@
         cursor: pointer;
         text-decoration: none;
         transition: 0.3s;
-        box-shadow: 0 0 15px #ff00ff;
+        box-shadow: 0 0 15px #00ff87;
     }
     .btn:hover {
-        box-shadow: 0 0 25px #00ffff, 0 0 35px #ff00ff;
+        box-shadow: 0 0 25px #0072ff, 0 0 35px #00ff87;
         transform: scale(1.1) rotate(-2deg);
     }
 </style>
 </head>
 <body>
-<div class="overlay"></div>
+
 <header>Sale Script & Partner By Asep Not Dev</header>
 
 <div class="container">
@@ -181,5 +176,6 @@ function copyDana() {
     });
 }
 </script>
+
 </body>
 </html>
