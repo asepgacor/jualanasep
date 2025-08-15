@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For Sale AsepNotDev</title>
+  <title>Sell Produk Asep</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -13,21 +13,15 @@
     }
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-      background-size: 400% 400%;
-      animation: bgMove 10s ease infinite;
+      background: 
+        linear-gradient(135deg, rgba(26,42,108,0.7), rgba(58,96,115,0.7), rgba(0,255,135,0.7)),
+        url('https://files.catbox.moe/z4jyuq.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: white;
       min-height: 100vh;
     }
-    @keyframes bgMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
     header {
-      background: linear-gradient(90deg, #3a7bd5, #3a6073, #00d2ff);
-      background-size: 200% 200%;
-      animation: bgMove 6s ease infinite;
+      background: rgba(0,0,0,0.5);
       color: white;
       padding: 25px 10px;
       text-align: center;
@@ -35,6 +29,7 @@
       font-weight: 700;
       letter-spacing: 1px;
       box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+      backdrop-filter: blur(5px);
     }
     .container {
       display: grid;
@@ -88,7 +83,6 @@
     .buy-btn {
       background: linear-gradient(90deg, #00c6ff, #0072ff, #00ff87);
       background-size: 200% 200%;
-      animation: bgMove 4s ease infinite;
       color: white;
       padding: 10px 20px;
       border: none;
@@ -112,9 +106,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #1a2a6c, #3a6073, #00ff87);
-      background-size: 400% 400%;
-      animation: bgMove 8s ease infinite;
+      background: rgba(0,0,0,0.85);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -147,7 +139,7 @@
     <div class="spinner"></div>
   </div>
 
-  <header> For Sale AsepNotDev </header>
+  <header>Sell Produk Asep</header>
   
   <div class="container" id="product-list"></div>
 
