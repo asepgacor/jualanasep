@@ -12,18 +12,31 @@
         background: url('https://files.catbox.moe/z4jyuq.jpg') no-repeat center center/cover;
         color: white;
         text-align: center;
-        backdrop-filter: blur(5px);
+        overflow-x: hidden;
     }
+    /* Overlay Gradient agar teks jelas */
     .overlay {
-        background: rgba(0, 0, 0, 0.6);
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7));
         position: fixed;
         inset: 0;
         z-index: -1;
     }
+    /* Efek Partikel */
+    canvas {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: -2;
+    }
     h1 {
         margin-top: 20px;
         font-size: 2.5em;
-        text-shadow: 0 0 10px #ff00ff;
+        text-shadow: 0 0 15px #ff00ff;
+        animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+        from { text-shadow: 0 0 15px #ff00ff; }
+        to { text-shadow: 0 0 30px #00ffff; }
     }
     .container {
         display: flex;
@@ -33,17 +46,18 @@
         padding: 20px;
     }
     .card {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.08);
         border-radius: 15px;
         padding: 20px;
         width: 300px;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
         transition: 0.3s;
     }
     .card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 25px #ff00ff;
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 0 0 25px #00ffff;
     }
     .price {
         font-size: 1.3em;
@@ -69,27 +83,28 @@
     }
     .btn {
         padding: 12px 20px;
-        background: linear-gradient(45deg, #ff00ff, #00ffff);
+        background: linear-gradient(90deg, #ff00ff, #00ffff);
         border: none;
         border-radius: 25px;
         color: white;
         font-weight: bold;
         cursor: pointer;
         text-decoration: none;
-        transition: 0.3s;
-        box-shadow: 0 0 15px #ff00ff;
+        transition: 0.4s;
+        box-shadow: 0 0 15px rgba(255,255,255,0.2);
     }
     .btn:hover {
-        box-shadow: 0 0 25px #00ffff;
-        transform: scale(1.05);
+        box-shadow: 0 0 25px #00ffff, 0 0 35px #ff00ff;
+        transform: translateY(-3px) scale(1.05);
     }
 </style>
 </head>
 <body>
 
+<canvas id="particles"></canvas>
 <div class="overlay"></div>
 
-<h1>Sale Script And Patnert By Asep Not Dev</h1>
+<h1>💎 Sale Script & Partner By Asep Not Dev 💎</h1>
 
 <div class="container">
     <div class="card">
@@ -150,19 +165,52 @@
 </div>
 
 <div class="buttons">
-    <a class="btn" href="https://files.catbox.moe/qwe27o.jpg" target="_blank">Qris All Payment</a>
-    <button class="btn" onclick="copyDana()">Dana Asep</button>
-    <a class="btn" href="https://t.me/informationsasuke" target="_blank">Chanel Asep Not Dev</a>
-    <a class="btn" href="https://t.me/asepnotdev" target="_blank">Asep Not Dev</a>
+    <a class="btn" href="https://files.catbox.moe/qwe27o.jpg" target="_blank">💳 Qris All Payment</a>
+    <button class="btn" onclick="copyDana()">📱 Dana Asep</button>
+    <a class="btn" href="https://t.me/informationsasuke" target="_blank">📢 Chanel Asep Not Dev</a>
+    <a class="btn" href="https://t.me/asepnotdev" target="_blank">👑 Asep Not Dev</a>
 </div>
 
 <script>
     function copyDana() {
-        const danaNumber = "083862861689"; // Ganti dengan nomor Dana kamu
+        const danaNumber = "083862861689";
         navigator.clipboard.writeText(danaNumber).then(() => {
             alert("Nomor Dana berhasil disalin: " + danaNumber);
         });
     }
+
+    // Efek Partikel / Bintang Jatuh
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    for(let i=0; i<100; i++){
+        particles.push({
+            x: Math.random()*canvas.width,
+            y: Math.random()*canvas.height,
+            radius: Math.random()*2,
+            speedY: Math.random()*1 + 0.2
+        });
+    }
+
+    function animate(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle = 'white';
+        particles.forEach(p=>{
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI*2);
+            ctx.fill();
+            p.y += p.speedY;
+            if(p.y > canvas.height){
+                p.y = 0;
+                p.x = Math.random()*canvas.width;
+            }
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
 </script>
 
 </body>
