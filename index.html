@@ -86,6 +86,25 @@
         box-shadow: 0 0 25px #0072ff, 0 0 35px #00ff87;
         transform: scale(1.1) rotate(-2deg);
     }
+    /* Tombol musik */
+    #musicControl {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        background: #00ff87;
+        color: #000;
+        border: none;
+        border-radius: 50px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 0 15px #00ff87;
+        transition: 0.3s;
+    }
+    #musicControl:hover {
+        box-shadow: 0 0 25px #0072ff, 0 0 35px #00ff87;
+        transform: scale(1.1);
+    }
 </style>
 </head>
 <body>
@@ -162,11 +181,20 @@
 </div>
 
 <div class="buttons">
-    <a class="btn" href="https://link-qris-kamu.com" target="_blank">💳 QRIS All Payment</a>
+    <a class="btn" href="https://files.catbox.moe/qwe27o.jpg" target="_blank">💳 QRIS All Payment</a>
     <button class="btn" onclick="copyDana()">💰 Dana Asep</button>
     <a class="btn" href="https://t.me/informationsasuke" target="_blank">📢 Channel Telegram</a>
     <a class="btn" href="https://t.me/asepnotdev" target="_blank">👤 Chat Owner</a>
 </div>
+
+<!-- Musik Latar -->
+<audio id="backgroundMusic" autoplay loop>
+    <source src="https://www.example.com/lagu.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung pemutaran audio.
+</audio>
+
+<!-- Tombol Play/Pause Musik -->
+<button id="musicControl">⏸️ Pause Musik</button>
 
 <script>
 function copyDana() {
@@ -175,6 +203,20 @@ function copyDana() {
         alert("Nomor Dana berhasil disalin: " + danaNumber);
     });
 }
+
+// Kontrol musik
+const music = document.getElementById("backgroundMusic");
+const musicControl = document.getElementById("musicControl");
+
+musicControl.addEventListener("click", () => {
+    if (music.paused) {
+        music.play();
+        musicControl.textContent = "⏸️ Pause Musik";
+    } else {
+        music.pause();
+        musicControl.textContent = "▶️ Mainkan Musik";
+    }
+});
 </script>
 
 </body>
